@@ -1,5 +1,7 @@
 package org.miniproject.model;
 
+import org.miniproject.emun.UserType;
+import org.miniproject.exception.TeacherUserViolationException;
 import org.miniproject.util.AutoIdGenerator;
 
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.time.Period;
 import java.util.List;
 
 public class Course {
+    protected final String TeacherUser_Violation_Exception_Message = "The user you are trying to add is not a user with type 'Teacher'. Please verify and try again.";
     protected String ID;
     protected String name;
     protected User teacher;
@@ -32,8 +35,13 @@ public class Course {
         return teacher;
     }
 
-    public void setTeacher(User teacher) {
-        this.teacher = teacher;
+    public void setTeacher(User teacher) throws TeacherUserViolationException {
+        if (teacher.getUserType() == UserType.TEACHER){
+            this.teacher = teacher;
+        }
+        else{
+            throw new TeacherUserViolationException(TeacherUser_Violation_Exception_Message);
+        }
     }
 
     public LocalDate getStartDate() {
