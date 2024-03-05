@@ -1,8 +1,9 @@
 package org.miniproject.model;
 
-import org.miniproject.emun.UserType;
 import org.miniproject.exception.EmailValidationException;
 import org.miniproject.exception.PhoneNumberValidationException;
+import org.miniproject.model.submodel.UserAddress;
+import org.miniproject.model.submodel.UserPhoneNumber;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,8 +20,8 @@ public class Student extends User{
         this.enrolledCourses = enrolledCourses;
     }
 
-    public Student(String fname, String lname, String email, LocalDate birthdate, UserAddress address, UserPhoneNumber phoneNumber, UserType userType, List<Enrollment> enrolledCourses) throws EmailValidationException, PhoneNumberValidationException {
-        super(fname, lname, email, birthdate, address, phoneNumber, userType);
+    public Student(String fname, String lname, String email, LocalDate birthdate, UserAddress address, UserPhoneNumber phoneNumber, List<Enrollment> enrolledCourses) throws EmailValidationException, PhoneNumberValidationException {
+        super(fname, lname, email, birthdate, address, phoneNumber);
         this.enrolledCourses = enrolledCourses;
     }
 

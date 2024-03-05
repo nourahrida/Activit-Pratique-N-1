@@ -1,4 +1,4 @@
-package org.miniproject.model;
+package org.miniproject.model.submodel;
 
 public class UserAddress {
     private String streetAddress;

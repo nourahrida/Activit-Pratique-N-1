@@ -1,8 +1,9 @@
 package org.miniproject.model;
 
-import org.miniproject.emun.UserType;
 import org.miniproject.exception.EmailValidationException;
 import org.miniproject.exception.PhoneNumberValidationException;
+import org.miniproject.model.submodel.UserAddress;
+import org.miniproject.model.submodel.UserPhoneNumber;
 import org.miniproject.util.AgeCalculator;
 import org.miniproject.util.AutoIdGenerator;
 import org.miniproject.util.EmailValidator;
@@ -91,7 +92,7 @@ public class User {
     }
 
 
-    public User(String fname, String lname, String email, LocalDate birthdate, UserAddress address, UserPhoneNumber phoneNumber, UserType userType) throws EmailValidationException, PhoneNumberValidationException {
+    public User(String fname, String lname, String email, LocalDate birthdate, UserAddress address, UserPhoneNumber phoneNumber) throws EmailValidationException, PhoneNumberValidationException {
         this.ID = AutoIdGenerator.generateAutoId(fname, lname);
         this.setFname(fname);
         this.setLname(lname);
