@@ -7,17 +7,19 @@ import org.miniproject.util.AutoIdGenerator;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
     protected final String TeacherUser_Violation_Exception_Message = "The user you are trying to add is not a user with type 'Teacher'. Please verify and try again.";
     protected String ID;
     protected String name;
-    protected User teacher;
+    protected Teacher teacher;
     protected LocalDate startDate;
     protected LocalDate endDate;
     protected int durationInWeeks;
     protected String description;
     protected List<User> enrolledStudents;
+    protected List<Exam> enrolledExams;
 
     public String getID() {
         return ID;
@@ -35,13 +37,8 @@ public class Course {
         return teacher;
     }
 
-    public void setTeacher(User teacher) throws TeacherUserViolationException {
-        if (teacher.getUserType() == UserType.TEACHER){
-            this.teacher = teacher;
-        }
-        else{
-            throw new TeacherUserViolationException(TeacherUser_Violation_Exception_Message);
-        }
+    public void setTeacher(Teacher teacher) throws TeacherUserViolationException {
+       this.teacher = teacher;
     }
 
     public LocalDate getStartDate() {
@@ -83,7 +80,15 @@ public class Course {
         this.enrolledStudents = enrolledStudents;
     }
 
-    public Course(String name, User teacher, LocalDate startDate, LocalDate endDate, int durationInWeeks, String description, List<User> enrolledStudents) {
+    public List<Exam> getEnrolledExams() {
+        return enrolledExams;
+    }
+
+    public void setEnrolledExams(List<Exam> enrolledExams) {
+        this.enrolledExams = enrolledExams;
+    }
+
+    public Course(String name, Teacher teacher, LocalDate startDate, LocalDate endDate, int durationInWeeks, String description, List<User> enrolledStudents, List<Exam> enrolledExams) {
         this.ID = AutoIdGenerator.generateAutoId(name);
         this.name = name;
         this.teacher = teacher;
@@ -92,5 +97,35 @@ public class Course {
         this.durationInWeeks = durationInWeeks;
         this.description = description;
         this.enrolledStudents = enrolledStudents;
+        this.enrolledExams = enrolledExams;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return durationInWeeks == course.durationInWeeks && Objects.equals(TeacherUser_Violation_Exception_Message, course.TeacherUser_Violation_Exception_Message) && Objects.equals(ID, course.ID) && Objects.equals(name, course.name) && Objects.equals(teacher, course.teacher) && Objects.equals(startDate, course.startDate) && Objects.equals(endDate, course.endDate) && Objects.equals(description, course.description) && Objects.equals(enrolledStudents, course.enrolledStudents) && Objects.equals(enrolledExams, course.enrolledExams);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(TeacherUser_Violation_Exception_Message, ID, name, teacher, startDate, endDate, durationInWeeks, description, enrolledStudents, enrolledExams);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "TeacherUser_Violation_Exception_Message='" + TeacherUser_Violation_Exception_Message + '\'' +
+                ", ID='" + ID + '\'' +
+                ", name='" + name + '\'' +
+                ", teacher=" + teacher +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", durationInWeeks=" + durationInWeeks +
+                ", description='" + description + '\'' +
+                ", enrolledStudents count=" + enrolledStudents.size() +
+                ", enrolledExams count=" + enrolledExams.size() +
+                '}';
     }
 }

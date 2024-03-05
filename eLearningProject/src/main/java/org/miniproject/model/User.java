@@ -23,7 +23,6 @@ public class User {
     protected int age;
     protected UserAddress address;
     protected UserPhoneNumber phoneNumber;
-    protected UserType userType;
 
     public String getID() {
         return ID;
@@ -91,13 +90,6 @@ public class User {
         }
     }
 
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
 
     public User(String fname, String lname, String email, LocalDate birthdate, UserAddress address, UserPhoneNumber phoneNumber, UserType userType) throws EmailValidationException, PhoneNumberValidationException {
         this.ID = AutoIdGenerator.generateAutoId(fname, lname);
@@ -107,7 +99,10 @@ public class User {
         this.setBirthdate(birthdate);
         this.setAddress(address);
         this.setPhoneNumber(phoneNumber);
-        this.setUserType(userType);
+    }
+    public User(){
+        // default constructor
+
     }
 
     @Override
