@@ -1,14 +1,19 @@
 package org.miniproject.model;
 
+import lombok.NoArgsConstructor;
 import org.miniproject.util.AutoIdGenerator;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
 @Entity
+@NoArgsConstructor()
 public class Course {
     protected final String TeacherUser_Violation_Exception_Message = "The user you are trying to add is not a user with type 'Teacher'. Please verify and try again.";
+
+    @Id
     protected String ID;
     protected String name;
     protected LocalDate startDate;
